@@ -1,0 +1,23 @@
+---
+
+- name: install darktable
+  block:
+    - homebrew_cask:
+        name: darktable
+        state: present
+      when: ansible_os_family == 'Darwin'
+
+    - apt: 
+        name: darktable
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - portage:
+        package: media-gfx/darktable
+        state: present
+      when: ansible_os_family == 'Gentoo'
+
+    - win_chocolatey:
+        name: darktable
+        state: present
+      when: ansible_os_family == 'Windows'   
